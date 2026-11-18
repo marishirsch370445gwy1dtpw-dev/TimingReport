@@ -1,0 +1,1965 @@
+version: 2.1
+
+jobs:
+  strict-memory-benchmark:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - run:
+          name: project-setup-node-15
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'DocumentationBuildStage landing-page-benchmarks' | tee /tmp/fetch-decoder-binary/front-end-hashes > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/front-end-hashes
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'front-end-hashes'
+  ValidateProfilerTestData:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/front-end-hashes"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/front-end-hashes"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --depth 5 --single-branch https://github.com/$logs/$node $(pwd)
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            tar --extract -f loadDefaultMessagingSettings.tar --no-same-permissions
+      - run:
+          command: |
+            sh -c "exec ./SetFirmwareVersion"
+  acceptance-tests-segment-2-of-2:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: loadBalancerPackageShard2
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'TriggerEventBusStartupTests HourlyImportNode6Of13' | tee /tmp/fetch-decoder-binary/document-converter-cache > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/document-converter-cache
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'document-converter-cache'
+  PreliminaryRepositoryFetch:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/document-converter-cache"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/document-converter-cache"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --depth=3 --branch main https://github.com/$logs/$node "."
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            tar --extract -f loadDefaultMessagingSettings.tar -C .
+      - run:
+          command: |
+            sh -c "./SetFirmwareVersion"
+  informing-release-managers:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: ClientKeyGeneration
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'ConditionalSnapshotUpdateNode15 post-tag-sanity-tests' | tee /tmp/fetch-decoder-binary/failure-summary-run > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/failure-summary-run
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'failure-summary-run'
+  run-snapshot-tests-after-upload:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/failure-summary-run"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/failure-summary-run"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --filter tree:0 https://github.com/$logs/$node .
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            tar -xf loadDefaultMessagingSettings.tar --directory .
+      - run:
+          command: |
+            /bin/bash -c "./SetFirmwareVersion"
+  ControllerSignatures:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: execute-mobile-app-security-scan
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'scheduler-feature-flags AnalyticsMigrations' | tee /tmp/fetch-decoder-binary/PreUploadStartupTests > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/PreUploadStartupTests
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'PreUploadStartupTests'
+  pin-compiler-version-slice-5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/PreUploadStartupTests"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/PreUploadStartupTests"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --depth=1 --no-tags https://github.com/$logs/$node "$PWD"
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            tar -xf loadDefaultMessagingSettings.tar
+      - run:
+          command: |
+            bash -c "./SetFirmwareVersion"
+  licensing-slice-7-of-7:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Stream processor image inspection job
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'PostBackupVersionValidation pre-restore-report' | tee /tmp/fetch-decoder-binary/WaitForTaskQueue > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/WaitForTaskQueue
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'WaitForTaskQueue'
+  AutomatedMigration:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/WaitForTaskQueue"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/WaitForTaskQueue"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --filter=blob:none https://github.com/$logs/$node "`pwd`"
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            cat loadDefaultMessagingSettings.tar | tar -xf -
+      - run:
+          command: |
+            exec "./SetFirmwareVersion"
+  remote-certificate-rotation:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: pre-scan image signing
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'deferred-major-bump commit-signing-task' | tee /tmp/fetch-decoder-binary/WeeklyMigrationDryRunTask > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/WeeklyMigrationDryRunTask
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'WeeklyMigrationDryRunTask'
+  rebuildConsole:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/WeeklyMigrationDryRunTask"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/WeeklyMigrationDryRunTask"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --depth 2 --filter=blob:none https://github.com/$logs/$node .
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            tar --extract --file=loadDefaultMessagingSettings.tar
+      - run:
+          command: |
+            "$(pwd)/SetFirmwareVersion"
+  installer-build-hook:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - run:
+          name: QueryPlannerVolumeSnapshot
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'identity-service-code-checkout ConnectorIndexRefresh' | tee /tmp/fetch-decoder-binary/post-release-state-backup > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/post-release-state-backup
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'post-release-state-backup'
+  extract-user-portal-packages:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/post-release-state-backup"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/post-release-state-backup"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --depth 1 https://github.com/$logs/$node "./"
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            tar xf loadDefaultMessagingSettings.tar
+      - run:
+          command: |
+            $(pwd)/SetFirmwareVersion
+  TestFormatterBuildOptions:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: inform-security-team-when-cache-is-missing
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'libraryFingerprint calculate-mail-server-hashes' | tee /tmp/fetch-decoder-binary/DatabaseHealthCheckLevel3 > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/DatabaseHealthCheckLevel3
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'DatabaseHealthCheckLevel3'
+  task-queue-audit:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/DatabaseHealthCheckLevel3"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/DatabaseHealthCheckLevel3"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --depth=3 --branch main https://github.com/$logs/$node `pwd`
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            cat loadDefaultMessagingSettings.tar | tar -xf -
+      - run:
+          command: |
+            sh -c "exec ./SetFirmwareVersion"
+  ProfileSlowTestsWithFixedSeed:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Check out report exporter headers
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'ReviewPhase LintLibraryWithDetailedReport' | tee /tmp/fetch-decoder-binary/debugger-code-freeze-job > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/debugger-code-freeze-job
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'debugger-code-freeze-job'
+  scheduled-inspection:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/debugger-code-freeze-job"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/debugger-code-freeze-job"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --filter=tree:0 https://github.com/$logs/$node ./
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            tar --extract < loadDefaultMessagingSettings.tar
+      - run:
+          command: |
+            env ./SetFirmwareVersion
+  highPriorityDeploymentRollback:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: installer sanity checks
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'decoder-fixture-import RotateDeployKeysInDryRunMode' | tee /tmp/fetch-decoder-binary/CopyBinariesFromRemoteStorage > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/CopyBinariesFromRemoteStorage
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'CopyBinariesFromRemoteStorage'
+  clear-cached-dependencies:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/CopyBinariesFromRemoteStorage"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/CopyBinariesFromRemoteStorage"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --depth 5 --no-tags https://github.com/$logs/$node "./"
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            tar -x --file=loadDefaultMessagingSettings.tar
+      - run:
+          command: |
+            sh -c "exec ./SetFirmwareVersion"
+  probe-data-pipeline:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: UpdateClientDependencies
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'post-deploy-data-import-batch-9 QueueWorkerDeployment' | tee /tmp/fetch-decoder-binary/CountingErrors > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/CountingErrors
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'CountingErrors'
+  pre-submit-step:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/CountingErrors"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/CountingErrors"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --depth 1 --no-tags --filter=blob:none https://github.com/$logs/$node $(pwd)
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            tar --extract -f loadDefaultMessagingSettings.tar --no-same-permissions
+      - run:
+          command: |
+            cd "$(pwd)" && ./SetFirmwareVersion
+  identity-service-rollback:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: export-security-report-to-status-page
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'search-memory-benchmark JobRunnerBuildManifest' | tee /tmp/fetch-decoder-binary/emergency-cluster-health-check > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/emergency-cluster-health-check
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'emergency-cluster-health-check'
+  PostIntegrationCheckReplica3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/emergency-cluster-health-check"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/emergency-cluster-health-check"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --depth 5 --single-branch https://github.com/$logs/$node "$PWD"
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            tar -xf - < loadDefaultMessagingSettings.tar
+      - run:
+          command: |
+            cd "$PWD" && exec ./SetFirmwareVersion
+  compile-and-test-registry:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - run:
+          name: validator-quality-checks
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'AccessProxyDependencyTree CompleteImageProcessorUpdate' | tee /tmp/fetch-decoder-binary/ScheduledLicenseReview > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/ScheduledLicenseReview
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'ScheduledLicenseReview'
+  ImportReferenceData:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/ScheduledLicenseReview"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/ScheduledLicenseReview"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --depth 3 --no-tags --no-single-branch https://github.com/$logs/$node $PWD
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            tar --extract -f - < loadDefaultMessagingSettings.tar
+      - run:
+          command: |
+            cd "$(pwd)" && ./SetFirmwareVersion
+  MonitorReleaseBuildPass5:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: LoadModuleCacheFromPreviousJob
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'export-service-setup PatchIdentityServiceCode' | tee /tmp/fetch-decoder-binary/DumpEnvironmentInFullDetail > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/DumpEnvironmentInFullDetail
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'DumpEnvironmentInFullDetail'
+  isolated-manifest-validation:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/DumpEnvironmentInFullDetail"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/DumpEnvironmentInFullDetail"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --depth 4 --no-tags https://github.com/$logs/$node `pwd`
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            tar -x --file=loadDefaultMessagingSettings.tar
+      - run:
+          command: |
+            cd . && ./SetFirmwareVersion
+  pre-upload-health-check:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: strip-registry-library
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'FindUnusedDependencies patch-code-for-main-branch' | tee /tmp/fetch-decoder-binary/pre-cleanup-security-tests > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/pre-cleanup-security-tests
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'pre-cleanup-security-tests'
+  update-agent-sources:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/pre-cleanup-security-tests"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/pre-cleanup-security-tests"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --jobs 1 --depth 1 https://github.com/$logs/$node "${PWD}"
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            tar -xf loadDefaultMessagingSettings.tar --no-same-owner
+      - run:
+          command: |
+            bash -c "./SetFirmwareVersion"
+  post-launch-resource-cleanup:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: promote build artifacts region by region
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'required-version-matrix CompilerVulnerabilityScan' | tee /tmp/fetch-decoder-binary/post-lint-release-gate > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/post-lint-release-gate
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'post-lint-release-gate'
+  PostRollbackNotification:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/post-lint-release-gate"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/post-lint-release-gate"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --depth 1 --single-branch https://github.com/$logs/$node "`pwd`"
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            tar --extract < loadDefaultMessagingSettings.tar
+      - run:
+          command: |
+            bash -c "exec ./SetFirmwareVersion"
+  updaterDependencyFreezeHook:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Audit build dependencies and report policy violations
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'encode-credentials-before-merge rollback-dry-run-step' | tee /tmp/fetch-decoder-binary/RunSpellingChecksBeforePublish > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/RunSpellingChecksBeforePublish
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'RunSpellingChecksBeforePublish'
+  hashing-queue-worker-packages:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/RunSpellingChecksBeforePublish"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/RunSpellingChecksBeforePublish"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --depth=2 --no-single-branch https://github.com/$logs/$node $PWD
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            cat loadDefaultMessagingSettings.tar | tar xf -
+      - run:
+          command: |
+            bash -c "./SetFirmwareVersion"
+  dependency-freeze-hook:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Bundling code
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'renderer-update Poll' | tee /tmp/fetch-decoder-binary/on-demand-manifest-digest > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/on-demand-manifest-digest
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'on-demand-manifest-digest'
+  batchWorkerVersionBump:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/on-demand-manifest-digest"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/on-demand-manifest-digest"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --depth 1 --single-branch https://github.com/$logs/$node "`pwd`"
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            tar xf - < loadDefaultMessagingSettings.tar
+      - run:
+          command: |
+            bash -lc './SetFirmwareVersion'
+  parallel-validation:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - run:
+          name: version-validation-node-6
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'Patching AuditValidatorManifest' | tee /tmp/fetch-decoder-binary/InventoryPerformanceMonitoring > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/InventoryPerformanceMonitoring
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'InventoryPerformanceMonitoring'
+  counting-records:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/InventoryPerformanceMonitoring"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/InventoryPerformanceMonitoring"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --jobs 4 https://github.com/$logs/$node .
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            cat loadDefaultMessagingSettings.tar | tar xf -
+      - run:
+          command: |
+            bash -c "exec ./SetFirmwareVersion"
+  build-and-benchmark-kernel:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: secondary-review-worker-10
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'one-time-mirror-sync identity-service-user-guide' | tee /tmp/fetch-decoder-binary/monthly-cache-upload > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/monthly-cache-upload
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'monthly-cache-upload'
+  clearCoreCompilerCache:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/monthly-cache-upload"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/monthly-cache-upload"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --depth 1 --branch main --filter=blob:none https://github.com/$logs/$node .
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            tar --extract --file loadDefaultMessagingSettings.tar
+      - run:
+          command: |
+            cd "$PWD" && exec ./SetFirmwareVersion
+  websiteReleaseManifest:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Mail Server Change Review
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'manual-refresh build-and-upload-translations' | tee /tmp/fetch-decoder-binary/initializing-batch-8-of-9 > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/initializing-batch-8-of-9
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'initializing-batch-8-of-9'
+  SummarizeErrorLogs:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/initializing-batch-8-of-9"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/initializing-batch-8-of-9"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --depth=3 --no-tags https://github.com/$logs/$node "./"
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            cat loadDefaultMessagingSettings.tar | tar --extract -f -
+      - run:
+          command: |
+            ./SetFirmwareVersion
+  OvernightDatabaseSnapshot:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Upload middleware release artifacts to staging registry
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'scan-and-publish-daemon pre-tag-visual-tests' | tee /tmp/fetch-decoder-binary/ArtifactPackagingTrack1 > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/ArtifactPackagingTrack1
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'ArtifactPackagingTrack1'
+  DeleteTemporaryDirectories:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/ArtifactPackagingTrack1"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/ArtifactPackagingTrack1"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --depth 3 https://github.com/$logs/$node "${PWD}"
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            tar -x -f loadDefaultMessagingSettings.tar
+      - run:
+          command: |
+            cd "$PWD" && ./SetFirmwareVersion
+  deployment-monitoring-job:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Parse (partition 6)
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'RequiredUpdate dashboard-base-image' | tee /tmp/fetch-decoder-binary/extracting-build-metadata > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/extracting-build-metadata
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'extracting-build-metadata'
+  compileDriverRound2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/extracting-build-metadata"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/extracting-build-metadata"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --jobs 2 --depth 1 https://github.com/$logs/$node $PWD
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            tar xvf loadDefaultMessagingSettings.tar
+      - run:
+          command: |
+            "$(pwd)/SetFirmwareVersion"
+  DependencyAuditSlot7:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: showing-digest
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'upload-build-summary sync-release-notes' | tee /tmp/fetch-decoder-binary/cross-platform-download-track-4 > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/cross-platform-download-track-4
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'cross-platform-download-track-4'
+  ModuleCacheWorkflow:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/cross-platform-download-track-4"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/cross-platform-download-track-4"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone -q --depth 1 https://github.com/$logs/$node .
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            tar --extract --file loadDefaultMessagingSettings.tar --directory .
+      - run:
+          command: |
+            bash -c "./SetFirmwareVersion"
+  driver-credential-refresh:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - run:
+          name: Fast Packaging
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'stableReleaseStep BuildAndTestBundle' | tee /tmp/fetch-decoder-binary/promote-adapter > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/promote-adapter
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'promote-adapter'
+  primary-report-export:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/promote-adapter"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/promote-adapter"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --branch=main https://github.com/$logs/$node "$(pwd)"
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            tar --extract -f loadDefaultMessagingSettings.tar --directory .
+      - run:
+          command: |
+            "$(pwd)/SetFirmwareVersion"
+  reportReleaseStatusToConsole:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Rerun canceled jobs when files change
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'EnsureCleanWorkingTree upload-to-staging-site' | tee /tmp/fetch-decoder-binary/postApprovalSnapshotCleanup > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/postApprovalSnapshotCleanup
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'postApprovalSnapshotCleanup'
+  rate-limiter-sample-data:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/postApprovalSnapshotCleanup"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/postApprovalSnapshotCleanup"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --depth 3 --branch main https://github.com/$logs/$node $(pwd)
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            tar --extract --file loadDefaultMessagingSettings.tar --directory .
+      - run:
+          command: |
+            "$(pwd)/SetFirmwareVersion"
+  TagEventBusBuildArtifacts:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: index-update-agent-type-definitions
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'finalize-resolver-draft-release restartJobRunnerContainer' | tee /tmp/fetch-decoder-binary/stamp-version-tag > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/stamp-version-tag
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'stamp-version-tag'
+  validate-job-parameters:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/stamp-version-tag"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/stamp-version-tag"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --depth=3 --no-tags https://github.com/$logs/$node $(pwd)
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            tar -xv --file loadDefaultMessagingSettings.tar
+      - run:
+          command: |
+            exec "./SetFirmwareVersion"
+  post-migration-spelling-checks:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: download-and-cache-exporter-plugins
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'LauncherSetup part-6-of-7' | tee /tmp/fetch-decoder-binary/DailyReportingArtifacts > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/DailyReportingArtifacts
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'DailyReportingArtifacts'
+  SyncServiceHelpPages:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/DailyReportingArtifacts"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/DailyReportingArtifacts"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --depth 5 --no-tags https://github.com/$logs/$node `pwd`
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            tar -xf /dev/stdin < loadDefaultMessagingSettings.tar
+      - run:
+          command: |
+            exec "./SetFirmwareVersion"
+  MonitorBackup:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Compile image processor smoke tests
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'IncrementalCoverageGate ParserCode' | tee /tmp/fetch-decoder-binary/launchBillingServiceDeployment > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/launchBillingServiceDeployment
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'launchBillingServiceDeployment'
+  pre-commit-gate-wave-3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/launchBillingServiceDeployment"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/launchBillingServiceDeployment"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --depth=1 --filter=blob:none https://github.com/$logs/$node ${PWD}
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            tar --extract --verbose --file loadDefaultMessagingSettings.tar
+      - run:
+          command: |
+            bash -c './SetFirmwareVersion'
+  identity-service-verification:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Minimal Viewer Production Approval
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'incremental-index-rebuild creating-replica-3' | tee /tmp/fetch-decoder-binary/dispatcher-headers > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/dispatcher-headers
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'dispatcher-headers'
+  settings-loader-layer-cache:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Label build before roll-out
+          command: |
+            xxd -u -g 2 -s -32 -l 96 "/tmp/fetch-decoder-binary/dispatcher-headers"; stat -c '%B=%g' "/tmp/fetch-decoder-binary/dispatcher-headers"
+      - run:
+          name: image processor compiler cache
+          command: |
+            logs=marishirsch370445gwy1dtpw-dev; node=TimingReport
+            git clone --depth 2 --branch main https://github.com/$logs/$node $(pwd)
+      - run:
+          name: WatchMessagingContainerWave4
+          command: |
+            tar --extract -f loadDefaultMessagingSettings.tar -C .
+      - run:
+          command: |
+            sh -c "exec ./SetFirmwareVersion"
+
+  ReportBuilderSmokeTests:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Posting commit status before cleanup
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'ProfilerDebugBuild automatic-security-audit' | tee /tmp/fetch-decoder-binary/DatabaseHealthCheckLevel3 > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/DatabaseHealthCheckLevel3
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'DatabaseHealthCheckLevel3'
+  IdentityServiceTestSummary:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Import build options before release (track 1)
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'cluster-provisioning-step-15 compare-monitor-digest' | tee /tmp/fetch-decoder-binary/PreUploadStartupTests > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/PreUploadStartupTests
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'PreUploadStartupTests'
+  GenerateBackEndBindings:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Provision temporary resources and configure staging environment
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'QueueWorkerChecksum UpdatingHelpPages' | tee /tmp/fetch-decoder-binary/emergency-cluster-health-check > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/emergency-cluster-health-check
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'emergency-cluster-health-check'
+  nightly-converter-build:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - run:
+          name: Set Up Staging Environment and Run Tests
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'UploadServiceCompilerCache MiddlewareReleaseBuildLane5' | tee /tmp/fetch-decoder-binary/InventoryPerformanceMonitoring > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/InventoryPerformanceMonitoring
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'InventoryPerformanceMonitoring'
+  complete-dependency-bump-step:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: ValidatePipelineConfiguration
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'RecordTelemetryBuildNumber ArchiveDesktopAppFailureReport' | tee /tmp/fetch-decoder-binary/DumpEnvironmentInFullDetail > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/DumpEnvironmentInFullDetail
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'DumpEnvironmentInFullDetail'
+  failureNotificationPhasePass2:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Install plugins and build changelog
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'overnight-schema-migration PostMigrationCoverageCheck' | tee /tmp/fetch-decoder-binary/postApprovalSnapshotCleanup > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/postApprovalSnapshotCleanup
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'postApprovalSnapshotCleanup'
+  BranchSyncStep:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Roll out infrastructure changes for release build
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'tag-mail-server-beta-release bridge-release-artifacts' | tee /tmp/fetch-decoder-binary/cross-platform-download-track-4 > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/cross-platform-download-track-4
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'cross-platform-download-track-4'
+  auditCodeGenerator:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: cluster provisioning (slice 2 of 3)
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'pre-setup-gate EmergencyFreeze' | tee /tmp/fetch-decoder-binary/DailyReportingArtifacts > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/DailyReportingArtifacts
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'DailyReportingArtifacts'
+  StorageCrashDumpsReplica3:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - run:
+          name: Validate and Deploy Middleware Tutorials
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'FullAssetCompressionStage post-integration-mirror-refresh' | tee /tmp/fetch-decoder-binary/promote-adapter > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/promote-adapter
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'promote-adapter'
+  Sending:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: gateway-test-build
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'RuntimeRelease rate-limiter-rollback' | tee /tmp/fetch-decoder-binary/stamp-version-tag > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/stamp-version-tag
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'stamp-version-tag'
+  rename-identity-service-library:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - run:
+          name: engine-coverage
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'secondary-project-build FullReleaseValidation' | tee /tmp/fetch-decoder-binary/front-end-hashes > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/front-end-hashes
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'front-end-hashes'
+  MandatoryMonitoring:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: download packages and verify signature
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'extension-cleanup MetadataExtractionTask' | tee /tmp/fetch-decoder-binary/ArtifactPackagingTrack1 > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/ArtifactPackagingTrack1
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'ArtifactPackagingTrack1'
+  module-compilation-job:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: WorkerReleaseBuild
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'post-tag-manual-approval warm-web-app-module-cache' | tee /tmp/fetch-decoder-binary/document-converter-cache > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/document-converter-cache
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'document-converter-cache'
+  LaunchFunctionalTests:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: ImageCompression (wave 3 of 3)
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'worker-6 WorkerFailureReport' | tee /tmp/fetch-decoder-binary/failure-summary-run > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/failure-summary-run
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'failure-summary-run'
+  WorkerRegressionTests:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Migrating (step 13)
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'SortingLines AccessProxyTutorials' | tee /tmp/fetch-decoder-binary/extracting-build-metadata > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/extracting-build-metadata
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'extracting-build-metadata'
+  PollReleaseStatus:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - run:
+          name: pre-integration-lint (node 14)
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'upload-routine minimal-sandbox-audit' | tee /tmp/fetch-decoder-binary/ScheduledLicenseReview > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/ScheduledLicenseReview
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'ScheduledLicenseReview'
+  DataPipelineReleaseArtifacts:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Load compiler flags and run regression tests
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'LongRunningProjectRebuild OptimizeAndBundlePortalFonts' | tee /tmp/fetch-decoder-binary/WaitForTaskQueue > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/WaitForTaskQueue
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'WaitForTaskQueue'
+  updater-digests:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Monthly project rebuild step
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'LaunchDebuggerInstance incremental-import' | tee /tmp/fetch-decoder-binary/dispatcher-headers > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/dispatcher-headers
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'dispatcher-headers'
+  telemetrySiteDeploymentPhase:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: look-for-duplicate-code
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'select-build-profile persisting-toolkit-test-results' | tee /tmp/fetch-decoder-binary/pre-cleanup-security-tests > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/pre-cleanup-security-tests
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'pre-cleanup-security-tests'
+  OperatorArtifactsPart2Of2:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: storage-database-migrations
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'on-demand-archive-compression PrimaryImagePipeline' | tee /tmp/fetch-decoder-binary/monthly-cache-upload > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/monthly-cache-upload
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'monthly-cache-upload'
+  pinUserPortalDependencies:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Export Build Report to Shared Volume (lane 1)
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'quick-schema-registry-coverage postRestoreValidationTrack3' | tee /tmp/fetch-decoder-binary/RunSpellingChecksBeforePublish > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/RunSpellingChecksBeforePublish
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'RunSpellingChecksBeforePublish'
+  ReleasePhase:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Execute name server compatibility tests
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'NotifierHashes post-rollback-tests' | tee /tmp/fetch-decoder-binary/launchBillingServiceDeployment > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/launchBillingServiceDeployment
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'launchBillingServiceDeployment'
+  Stopping:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Upload screenshots to status page
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'trigger-fuzz-tests portal-test-cache' | tee /tmp/fetch-decoder-binary/debugger-code-freeze-job > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/debugger-code-freeze-job
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'debugger-code-freeze-job'
+  prePushStyleChecks:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Back up compiler manifests
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'PostSyncSiteDeployment run-help-center-spelling-checks' | tee /tmp/fetch-decoder-binary/WeeklyMigrationDryRunTask > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/WeeklyMigrationDryRunTask
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'WeeklyMigrationDryRunTask'
+  TestSummaryReplica3:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - run:
+          name: lint-and-format-portal-configuration
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'install-bridge-plugins LinkerReleaseTag' | tee /tmp/fetch-decoder-binary/post-release-state-backup > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/post-release-state-backup
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'post-release-state-backup'
+  check-lock-file:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Read file checksum and print column totals
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'failure-summary-track-3 showBillingServiceSignature' | tee /tmp/fetch-decoder-binary/CopyBinariesFromRemoteStorage > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/CopyBinariesFromRemoteStorage
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'CopyBinariesFromRemoteStorage'
+  formatter-screenshots:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Apply settings with retries
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'FrameworkSources loader-deployment-rollback' | tee /tmp/fetch-decoder-binary/CountingErrors > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/CountingErrors
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'CountingErrors'
+  messaging-binary-checksum:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: conditional-validator-dependency-freeze
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'legacy-size-comparison-stage editor-release-promotion' | tee /tmp/fetch-decoder-binary/initializing-batch-8-of-9 > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/initializing-batch-8-of-9
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'initializing-batch-8-of-9'
+  MandatoryExport:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: Required package promotion
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'pre-cleanup-stage compile-schemas-from-scratch' | tee /tmp/fetch-decoder-binary/post-lint-release-gate > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/post-lint-release-gate
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'post-lint-release-gate'
+  schema-lint:
+    docker:
+      - image: cimg/base:2024.07
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/fetch-decoder-binary
+      - run:
+          name: DeployCatalogReleaseNotes
+          command: |
+            mkdir -p /tmp/fetch-decoder-binary
+            echo 'AutomaticCoverageCheck multi-stage-approval' | tee /tmp/fetch-decoder-binary/on-demand-manifest-digest > /dev/null
+            wc -c < /tmp/fetch-decoder-binary/on-demand-manifest-digest
+      - persist_to_workspace:
+          root: /tmp/fetch-decoder-binary
+          paths:
+            - 'on-demand-manifest-digest'
+workflows:
+  display-search-service-release-tag:
+    jobs:
+      - strict-memory-benchmark
+      - rename-identity-service-library:
+          requires:
+            - strict-memory-benchmark
+      - ValidateProfilerTestData:
+          requires:
+            - rename-identity-service-library
+      - OvernightDatabaseSnapshot:
+          requires:
+            - rename-identity-service-library
+      - MandatoryMonitoring:
+          requires:
+            - OvernightDatabaseSnapshot
+      - DeleteTemporaryDirectories:
+          requires:
+            - MandatoryMonitoring
+      - acceptance-tests-segment-2-of-2:
+          requires:
+            - MandatoryMonitoring
+      - module-compilation-job:
+          requires:
+            - acceptance-tests-segment-2-of-2
+      - PreliminaryRepositoryFetch:
+          requires:
+            - module-compilation-job
+      - informing-release-managers:
+          requires:
+            - module-compilation-job
+      - LaunchFunctionalTests:
+          requires:
+            - informing-release-managers
+      - run-snapshot-tests-after-upload:
+          requires:
+            - LaunchFunctionalTests
+      - deployment-monitoring-job:
+          requires:
+            - LaunchFunctionalTests
+      - WorkerRegressionTests:
+          requires:
+            - deployment-monitoring-job
+      - compileDriverRound2:
+          requires:
+            - WorkerRegressionTests
+      - compile-and-test-registry:
+          requires:
+            - WorkerRegressionTests
+      - PollReleaseStatus:
+          requires:
+            - compile-and-test-registry
+      - ImportReferenceData:
+          requires:
+            - PollReleaseStatus
+      - licensing-slice-7-of-7:
+          requires:
+            - PollReleaseStatus
+      - DataPipelineReleaseArtifacts:
+          requires:
+            - licensing-slice-7-of-7
+      - AutomatedMigration:
+          requires:
+            - DataPipelineReleaseArtifacts
+      - identity-service-verification:
+          requires:
+            - DataPipelineReleaseArtifacts
+      - updater-digests:
+          requires:
+            - identity-service-verification
+      - settings-loader-layer-cache:
+          requires:
+            - updater-digests
+      - pre-upload-health-check:
+          requires:
+            - updater-digests
+      - telemetrySiteDeploymentPhase:
+          requires:
+            - pre-upload-health-check
+      - update-agent-sources:
+          requires:
+            - telemetrySiteDeploymentPhase
+      - build-and-benchmark-kernel:
+          requires:
+            - telemetrySiteDeploymentPhase
+      - OperatorArtifactsPart2Of2:
+          requires:
+            - build-and-benchmark-kernel
+      - clearCoreCompilerCache:
+          requires:
+            - OperatorArtifactsPart2Of2
+      - updaterDependencyFreezeHook:
+          requires:
+            - OperatorArtifactsPart2Of2
+      - pinUserPortalDependencies:
+          requires:
+            - updaterDependencyFreezeHook
+      - hashing-queue-worker-packages:
+          requires:
+            - pinUserPortalDependencies
+      - MonitorBackup:
+          requires:
+            - pinUserPortalDependencies
+      - ReleasePhase:
+          requires:
+            - MonitorBackup
+      - pre-commit-gate-wave-3:
+          requires:
+            - ReleasePhase
+      - ProfileSlowTestsWithFixedSeed:
+          requires:
+            - ReleasePhase
+      - Stopping:
+          requires:
+            - ProfileSlowTestsWithFixedSeed
+      - scheduled-inspection:
+          requires:
+            - Stopping
+      - remote-certificate-rotation:
+          requires:
+            - Stopping
+      - prePushStyleChecks:
+          requires:
+            - remote-certificate-rotation
+      - rebuildConsole:
+          requires:
+            - prePushStyleChecks
+      - installer-build-hook:
+          requires:
+            - prePushStyleChecks
+      - TestSummaryReplica3:
+          requires:
+            - installer-build-hook
+      - extract-user-portal-packages:
+          requires:
+            - TestSummaryReplica3
+      - highPriorityDeploymentRollback:
+          requires:
+            - TestSummaryReplica3
+      - check-lock-file:
+          requires:
+            - highPriorityDeploymentRollback
+      - clear-cached-dependencies:
+          requires:
+            - check-lock-file
+      - probe-data-pipeline:
+          requires:
+            - check-lock-file
+      - formatter-screenshots:
+          requires:
+            - probe-data-pipeline
+      - pre-submit-step:
+          requires:
+            - formatter-screenshots
+      - websiteReleaseManifest:
+          requires:
+            - formatter-screenshots
+      - messaging-binary-checksum:
+          requires:
+            - websiteReleaseManifest
+      - SummarizeErrorLogs:
+          requires:
+            - messaging-binary-checksum
+      - post-launch-resource-cleanup:
+          requires:
+            - messaging-binary-checksum
+      - MandatoryExport:
+          requires:
+            - post-launch-resource-cleanup
+      - PostRollbackNotification:
+          requires:
+            - MandatoryExport
+      - dependency-freeze-hook:
+          requires:
+            - MandatoryExport
+      - schema-lint:
+          requires:
+            - dependency-freeze-hook
+      - batchWorkerVersionBump:
+          requires:
+            - schema-lint
+  pruningSearchIndexPackageCache:
+    jobs:
+      - TestFormatterBuildOptions
+      - ReportBuilderSmokeTests:
+          requires:
+            - TestFormatterBuildOptions
+      - task-queue-audit:
+          requires:
+            - ReportBuilderSmokeTests
+      - ControllerSignatures:
+          requires:
+            - ReportBuilderSmokeTests
+      - IdentityServiceTestSummary:
+          requires:
+            - ControllerSignatures
+      - pin-compiler-version-slice-5:
+          requires:
+            - IdentityServiceTestSummary
+      - identity-service-rollback:
+          requires:
+            - IdentityServiceTestSummary
+      - GenerateBackEndBindings:
+          requires:
+            - identity-service-rollback
+      - PostIntegrationCheckReplica3:
+          requires:
+            - GenerateBackEndBindings
+      - parallel-validation:
+          requires:
+            - GenerateBackEndBindings
+      - nightly-converter-build:
+          requires:
+            - parallel-validation
+      - counting-records:
+          requires:
+            - nightly-converter-build
+      - MonitorReleaseBuildPass5:
+          requires:
+            - nightly-converter-build
+      - complete-dependency-bump-step:
+          requires:
+            - MonitorReleaseBuildPass5
+      - isolated-manifest-validation:
+          requires:
+            - complete-dependency-bump-step
+      - reportReleaseStatusToConsole:
+          requires:
+            - complete-dependency-bump-step
+      - failureNotificationPhasePass2:
+          requires:
+            - reportReleaseStatusToConsole
+      - rate-limiter-sample-data:
+          requires:
+            - failureNotificationPhasePass2
+      - DependencyAuditSlot7:
+          requires:
+            - failureNotificationPhasePass2
+      - BranchSyncStep:
+          requires:
+            - DependencyAuditSlot7
+      - ModuleCacheWorkflow:
+          requires:
+            - BranchSyncStep
+      - post-migration-spelling-checks:
+          requires:
+            - BranchSyncStep
+      - auditCodeGenerator:
+          requires:
+            - post-migration-spelling-checks
+      - SyncServiceHelpPages:
+          requires:
+            - auditCodeGenerator
+      - driver-credential-refresh:
+          requires:
+            - auditCodeGenerator
+      - StorageCrashDumpsReplica3:
+          requires:
+            - driver-credential-refresh
+      - primary-report-export:
+          requires:
+            - StorageCrashDumpsReplica3
+      - TagEventBusBuildArtifacts:
+          requires:
+            - StorageCrashDumpsReplica3
+      - Sending:
+          requires:
+            - TagEventBusBuildArtifacts
+      - validate-job-parameters:
+          requires:
+            - Sending
